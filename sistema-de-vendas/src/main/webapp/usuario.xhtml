@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="conteudo">
+		<h:form>
+			<p:panel header="Tela de Login">
+				<p:messages globalOnly="true" showDetail="true" showSummary="false"
+					closable="true" showIcon="true" />
+				<h:panelGrid columns="2" >
+				
+					
+					<p:outputLabel value="Nome Usuário:" for="login" >
+					<p:inputText id="login" value="#{user.user.login}" />					
+					<p:message for="login" />
+					</p:outputLabel>
+					<br />
+
+					<p:outputLabel value="Senha:" for="password" >
+					<p:password id="password" value="#{user.user.password}" />
+					<p:message for="password" />
+					</p:outputLabel>
+					<br />
+					<p:commandButton value="Enviar" icon="ui-icon-star"
+						action="#{user.envia}" ajax="false">
+					</p:commandButton>
+
+
+
+				</h:panelGrid>
+
+
+			</p:panel>
+
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>
+</html>

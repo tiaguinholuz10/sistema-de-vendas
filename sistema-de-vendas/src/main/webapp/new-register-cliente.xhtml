@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="conteudo">
+		<h:form>
+			<p:panel header="Cadastro de Clientes">
+				<p:separator />
+				<h:outputText value="Dados Pessoais:" />
+				<p:separator />
+				<br />
+				<p:messages globalOnly="true" showDetail="true" showSummary="false"
+					closable="true" showIcon="true" />
+
+
+				<div class="ui-fluid">
+					<h:panelGrid columns="6" cellpadding="4"
+						styleClass="ui-panelgrid-blank">
+
+
+						<p:outputLabel value="Nome:" for="nome">
+							<p:tooltip id="toolTipFocus" for="nome" showEvent="focus"
+								hideEvent="blur" />
+						</p:outputLabel>
+						<p:inputText id="nome" value="#{cliente.cliente.nome}"
+							maxlength="60" required="true"
+							requiredMessage="Nome: *Campo Obrigatório" />
+						<p:message for="nome" />
+
+						<p:outputLabel value="CPF:" for="cpf" />
+						<p:inputMask mask="999.999.999-99" id="cpf"
+							value="#{cliente.cliente.cpf}" required="true"
+							requiredMessage="Campo Obrigatorio!"
+							converterMessage="Falha ao converter CPF">
+							<f:converter converterId="cpfConverter" />
+							<f:validator validatorId="cpfValidator" />
+						</p:inputMask>
+						<p:message for="cpf" />
+						
+						<p:outputLabel value="Email:" for="email" />
+						<p:inputText id="email" value="#{cliente.cliente.email}"
+							required="true" requiredMessage="Email: *Campo Obrigatório"
+							maxlength="45">
+							<f:validator validatorId="emailValidator" />
+						</p:inputText>
+						<p:message for="email" />
+
+						<p:outputLabel for="data-nasc" value="Data Nasc:" />
+						<p:calendar id="data-nasc"
+							value="#{cliente.cliente.dataNascimento}" locale="pt_BR"
+							navigator="true" placeholder="30/12/1990" pattern="dd-MM-yyyy"
+							mask="true" showOn="button">
+						</p:calendar>
+
+
+					</h:panelGrid>
+				</div>
+				<br />
+				<p:separator />
+				<h:outputText value="Contato:" />
+				<p:separator />
+				<br />
+
+				<div class="ui-fluid">
+					<h:panelGrid columns="3" cellpadding="4"
+						styleClass="ui-panelgrid-blank">
+
+						<p:outputLabel value="Telefone Principal:" for="phone_prin" />
+						<p:inputMask mask="(99)99999999?9" id="phone_prin"
+							value="#{cliente.cliente.phone_prin}" required="true"
+							requiredMessage="Telefone: *Campo Obrigatório" />
+						<p:message for="phone_prin" />
+
+						<p:outputLabel value="Telefone Opcional:" for="phone_op" />
+						<p:inputMask mask="(99)99999999?9" id="phone_op"
+							value="#{cliente.cliente.phone_op}" />
+						<p:message for="phone_op" />
+
+					</h:panelGrid>
+				</div>
+				<br />
+				<p:separator />
+				<h:outputText value="Endereço:" />
+				<p:separator />
+				<br />
+
+				<div class="ui-fluid">
+					<h:panelGrid columns="6" cellpadding="4"
+						styleClass="ui-panelgrid-blank">
+
+
+						<p:outputLabel value="Rua" for="rua" />
+						<p:inputText id="rua" value="#{cliente.endereco.rua}"
+							required="true" requiredMessage="Campo Obrigatório" />
+						<p:message for="rua" />
+
+						<p:outputLabel value="Bairro: " for="bairro" />
+						<p:inputText id="bairro" value="#{cliente.endereco.bairro}"
+							required="true" requiredMessage="Campo Obrigatório" />
+						<p:message for="bairro" />
+
+						<p:outputLabel value="Cidade: " for="cidade" />
+						<p:inputText id="cidade" value="#{cliente.endereco.cidade}"
+							required="true" requiredMessage="Campo Obrigatório" />
+						<p:message for="cidade" />
+
+
+						<p:outputLabel value="Cep:" for="cep" />
+						<p:inputMask mask="99999999" id="cep"
+							value="#{cliente.endereco.cep}" required="true"
+							requiredMessage="Campo Obrigatório" />
+						<p:message for="cep" />
+
+					</h:panelGrid>
+				</div>
+				<br />
+				<br />
+				<p:separator />
+				<br />
+				<p:commandButton value="Salvar" action="#{cliente.salvar}"
+					update="@form" />
+
+				<p:commandButton value="Cancelar" action="#{cliente.cancelar}"
+					update="@form" immediate="true" resetValues="true" />
+
+
+
+				<div class="ui-fluid">
+					<p:panelGrid columns="2"
+						columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid"
+						styleClass="ui-panelgrid-blank">
+
+
+					</p:panelGrid>
+				</div>
+			</p:panel>
+
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>
+</html>

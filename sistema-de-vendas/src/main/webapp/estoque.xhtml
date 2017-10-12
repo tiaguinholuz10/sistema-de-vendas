@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="conteudo">
+		<h:form>
+			<p:panel header="Cadastro de Produtos">
+				<p:messages globalOnly="true" showDetail="true" showSummary="false"
+					closable="true" showIcon="true" />
+				<h:panelGrid columns="3" cellpadding="2">
+
+					<p:outputLabel value="Cód. Produto:" for="cod_produto" />
+					<p:inputMask mask="9999" id="cod_produto" value="#{estoque.estoque.cod_produto}"
+						required="true"  requiredMessage="Campo Obrigatório" />
+					<p:message for="cod_produto" />
+
+					
+					<p:outputLabel value="CNPJ:" for="cnpj" />
+					<p:inputMask mask="99.999.999/9999-99"
+						value="#{estoque.estoque.cnpj}" id="cnpj"
+						required="true"	requiredMessage="Campo Obrigatorio!"
+						converterMessage="Falha ao converter CNPJ">
+						<f:converter converterId="cnpjConverter" />
+						<f:validator validatorId="cnpjValidator" />																
+					</p:inputMask>
+					<p:message for="cnpj" />
+					
+					<p:outputLabel value="Data Entrada:" for="dt_ent" />
+					<p:calendar id="dt_ent" value="#{estoque.estoque.dt_ent}"
+						locale="pt_BR" navigator="true" placeholder="30/12/1990"
+						pattern="dd-MM-yyyy" mask="true" showOn="button">
+					</p:calendar>
+					<p:message for="dt_ent" />
+					
+					<p:outputLabel value="Quantidade" for="qtd" />
+					<pe:inputNumber id="qtd" decimalSeparator="," thousandSeparator="."
+						value="#{estoque.estoque.qtd}" required="true"
+						requiredMessage="Campo Obrigatório" />
+					<p:message for="qtd" />
+					
+					<p:outputLabel value="Valor Unitario: " for="vl_unit" />
+					<pe:inputNumber id="vl_unit" decimalSeparator=","
+						thousandSeparator="." value="#{estoque.estoque.vl_unit}"
+						required="true" symbol="R$  " requiredMessage="Campo Obrigatório"
+						placeholder="R$ 10.99" />
+					<p:message for="vl_unit" />
+					
+					<p:outputLabel value="Valor Total: " for="vl_total" />
+					<pe:inputNumber id="vl_total" decimalSeparator=","
+						thousandSeparator="." value="#{estoque.estoque.vl_total}"
+						required="true" symbol="R$  " requiredMessage="Campo Obrigatório"
+						placeholder="R$ 109.90" />
+					<p:message for="vl_total" />
+
+
+					<br />
+					<br />
+
+
+
+
+
+				</h:panelGrid>
+				<br />
+				<br />
+				<p:commandButton value="Salvar" action="#{produto.salvar}"
+					update="@form" />
+
+				<p:commandButton value="Cancelar" action="#{produto.cancelar}"
+					update="@form" immediate="true" resetValues="true" />
+				<br />
+				<p:separator />
+				<br />
+				<p:dataTable value="#{produto.produtos}" var="produto">
+					<!-- rendered="#{not empty produto.produtos}"> -->
+					<p:column headerText="Código do Produto">
+						<h:outputText value="#{produto.cod}" />
+					</p:column>
+					<p:column headerText="Nome">
+						<h:outputText value="#{produto.nome}" />
+					</p:column>
+					<p:column headerText="Saldo">
+						<h:outputText value="#{produto.saldo}" />
+					</p:column>
+					<p:column headerText="Unid.">
+						<h:outputText value="#{produto.unid}" />
+					</p:column>
+
+				</p:dataTable>
+			</p:panel>
+
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>
+</html>

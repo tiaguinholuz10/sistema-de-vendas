@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="conteudo">
+		<h:form>
+			<p:panel header="">
+				<p:separator />
+				<h:outputText value=" Dados Cadastrado" />
+				<p:separator />
+				<br />
+
+				<p:dataTable id="clientes" var="cliente" value="#{cliente.clientes}">
+
+					<f:facet name="header">
+					Lista de Clientes
+					
+					<p:commandButton id="toggler" type="button" value="Columns"
+							style="float:right" icon="ui-icon-calculator" />
+						<p:columnToggler datasource="clientes" trigger="toggler" />
+						<br />
+					</f:facet>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="CPF" />
+						</f:facet>
+						<h:outputText value="#{cliente.cpf}">
+							<f:converter converterId="cpfConverter" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Nome">
+						<h:outputText value="#{cliente.nome}" />
+					</p:column>
+
+					<p:column headerText="Data Nasc">
+						<h:outputText value="#{cliente.dataNascimento}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Telefone Principal">
+						<h:outputText value="#{cliente.phone_prin}" />
+					</p:column>
+
+					<p:column headerText="Telefone Opcional">
+						<h:outputText value="#{cliente.phone_op}" />
+					</p:column>
+
+					<p:column headerText="Email">
+						<h:outputText value="#{cliente.email}" />
+					</p:column>
+
+				</p:dataTable>
+
+				<h:commandLink id="excel">
+					<p:graphicImage name="/webapp/resources/img/excel.png" />
+					<p:dataExporter type="xls" target="tbl" fileName="clientes"
+						postProcessor="#{customizedDocumentsView.postProcessXLS}" />
+				</h:commandLink>
+
+				<h:commandLink id="pdf">
+					<p:graphicImage name="/webapp/resources/img/excel.png" />
+					<p:dataExporter type="pdf" target="tbl" fileName="clientes"
+						preProcessor="#{customizedDocumentsView.preProcessPDF}" />
+				</h:commandLink>
+			</p:panel>
+
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>
+</html>

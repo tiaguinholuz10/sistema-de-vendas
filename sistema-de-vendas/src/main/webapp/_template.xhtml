@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pm="http://primefaces.org/mobile">
+<f:view>
+	<h:head></h:head>
+	<h:body>
+		<pe:layout fullPage="true"
+			options="#{layoutController.layoutOptionsOne}"
+			rendered="#{layoutController.layoutOneShown}"
+			state="#{layoutController.stateOne}">
+
+
+			<!-- LAYOUT LEFT -->
+			<pe:layoutPane position="west"
+				styleContent="whidth:100%; background-color:#262626 ">
+
+				<div id="cabecalho" />
+				<a href="index.xhtml"> <h:graphicImage library="img"
+						name="main.png" height="200px" width="100%" />
+				</a>
+				<!-- MENU PARA NAVEGAR PELO SISTEMA -->
+				<p:growl autoUpdate="true" styleContent="whidth:100%" />
+
+				<p:megaMenu>
+					<p:menuitem value="Home" url="index.xhtml" icon="ui-icon-home"
+						style="font-weight: bold;" />
+				</p:megaMenu>
+
+				<p:panelMenu>
+
+					<p:submenu label="Cliente">
+						<p:menuitem value="Novo" icon="ui-icon-disk"
+							url="new-register-cliente.xhtml" />
+						<p:menuitem value="Atualizar" icon="ui-icon-arrowrefresh-1-w"
+							url="new-register-cliente.xhtml" />
+						<p:menuitem value="Excluir" icon="ui-icon-close"
+							url="new-register-cliente.xhtml" />
+						<p:menuitem value="Listagem de Cliente"
+							url="relacao-de-clientes.xhtml" />
+						<p:menuitem value="Tabela de Cliente" url="table-cliente.xhtml" />
+					</p:submenu>
+
+					<p:submenu label="Fornecedor">
+						<p:menuitem value="Fornecedor" url="fornecedor.xhtml" />
+					</p:submenu>
+
+					<p:submenu label="Produtos">
+						<p:menuitem value="Produto" url="produto.xhtml" />
+					</p:submenu>
+
+					<p:submenu label="Estoque">
+						<p:menuitem value="Estoque" url="estoque.xhtml" />
+					</p:submenu>
+
+				</p:panelMenu>
+
+				<h:form>
+					<p:growl autoUpdate="true" />
+
+					<p:panelMenu style="width:100%">
+
+						<p:submenu label="Menuitems">
+							<p:menuitem value="Save" actionListener="#{menuView.save}"
+								icon="ui-icon-disk" />
+							<p:menuitem value="Update" actionListener="#{menuView.update}"
+								icon="ui-icon-arrowrefresh-1-w" />
+						</p:submenu>
+
+						<p:separator />
+
+						<p:submenu label="Navigations">
+							<p:submenu label="Links" icon="ui-icon-extlink">
+								<p:submenu label="PrimeFaces" icon="ui-icon-heart">
+									<p:menuitem value="Home" url="index.xhtml" icon="ui-icon-home" />
+									<p:menuitem value="Docs"
+										url="http://www.primefaces.org/documentation"
+										icon="ui-icon-document" />
+									<p:menuitem value="Download"
+										url="http://www.primefaces.org/downloads"
+										icon="ui-icon-arrowthick-1-s" />
+									<p:menuitem value="Support"
+										url="http://www.primefaces.org/support" icon="ui-icon-wrench" />
+								</p:submenu>
+							</p:submenu>
+						</p:submenu>
+					</p:panelMenu>
+				</h:form>
+			</pe:layoutPane>
+
+
+			<!-- LAYOUT Right -->
+			<!--	<pe:layoutPane position="east">
+				MENU LATERAL DA LAYOUT Right
+			</pe:layoutPane>
+			
+			-->
+
+			<!-- LAYOUT Top-->
+			<!--		<pe:layoutPane position="north">
+
+				<p:splitButton value="Home" icon="ui-icon-disk" url="index.xhtml">
+					<p:menuitem value="Home" url="index.xhtml" icon="ui-icon-extlink" />
+				</p:splitButton>
+				</pe:layoutPane>
+				-->
+				
+			<!-- LAYOUT CENTER - PARTE CENTRAL DA LAYOUT  -->
+			<pe:layoutPane position="center">
+				<div id="conteudo">
+					<ui:insert name="conteudo">
+					</ui:insert>
+				</div>
+			</pe:layoutPane>
+			<!-- END LAYOUT CENTER-->
+
+			<!-- LAYOUT Bottom-South - PARTE INFERIOR DA LAYOUT  -->
+			<pe:layoutPane position="south"
+				styleContent="background-color:#262626;">
+				<div>
+					<h6 align="left"
+						style="color: white; font-size: 16px; height: 1px; width: 100%; text-align: center; margin-top: 2px; margin-bottom: 20px;">Todos
+						os direitos reservados @SystemBar.</h6>
+				</div>
+			</pe:layoutPane>
+			<!-- END LAYOUT Bottom-South-->
+			
+			
+			
+			
+			-->
+		</pe:layout>
+	</h:body>
+</f:view>
+</html>

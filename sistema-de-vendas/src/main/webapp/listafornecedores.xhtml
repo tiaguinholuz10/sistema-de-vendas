@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="conteudo">
+		<h:form>
+			<br />
+			<p:panel style="text-align:center;"
+				header="LISTA COMPLETA DE FORNECEDORES">
+				<p:messages globalOnly="true" showDetail="true" showSummary="false"
+					closable="true" showIcon="true" />
+				<br />
+
+				<p:dataTable value="#{fornecedor.fornecedores}" var="fornecedor"
+					rendered="#{not empty fornecedor.fornecedores}">
+
+					<p:column headerText="Razão Social">
+						<h:outputText value="#{fornecedor.rSocial}" />
+					</p:column>
+
+					<p:column headerText="CNPJ ">
+						<h:outputText value="#{fornecedor.cnpj}">
+							<f:converter converterId="cnpjConverter" />
+						</h:outputText>
+					</p:column>
+
+				</p:dataTable>
+
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

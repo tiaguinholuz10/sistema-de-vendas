@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="conteudo">
+		<h:form>
+			<p:panel header="">
+				<p:separator />
+				<h:outputText value=" Dados Cadastrado" />
+				<p:separator />
+				<br />
+
+				<p:dataTable var="cliente" value="#{cliente.clientes}">
+					<f:facet name="header">
+					Lista de Clientes
+					</f:facet>
+					<p:column style="width:16px">
+						<p:rowToggler />
+					</p:column>
+					<p:column headerText="CPF">
+						<h:outputText value="#{cliente.cpf}">
+							<f:converter converterId="cpfConverter" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Cliente">
+						<h:outputText value="#{cliente.nome}" />
+					</p:column>
+
+					<p:rowExpansion>
+						<p:panelGrid columns="2" columnClasses="label,value"
+							style="width:80%">
+
+							<p:outputLabel value="Nome:" />
+							<h:outputText value="#{cliente.nome}" />
+
+							<p:outputLabel value="CPF:" />
+							<h:outputText value="#{cliente.cpf}">
+								<f:converter converterId="cpfConverter" />
+							</h:outputText>
+
+							<p:outputLabel value="Data Nascimento:" />
+							<h:outputText value="#{cliente.dataNascimento}">
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+							</h:outputText>
+
+							<p:outputLabel value="Telefone Principal:" />
+							<h:outputText value="#{cliente.phone_prin}" />
+
+							<p:outputLabel value="Telefone Opcional:" />
+							<h:outputText value="#{cliente.phone_op}" />
+
+							<p:outputLabel value="Email:" />
+							<h:outputText value="#{cliente.email}" />
+
+							<p:outputLabel value="Rua:" />
+							<h:outputText value="#{cliente.endereco.rua}" />
+
+							<p:outputLabel value="Bairro:" />
+							<h:outputText value="#{cliente.endereco.bairro}" />
+
+							<p:outputLabel value="Cidade:" />
+							<h:outputText value="#{cliente.endereco.cidade}" />
+
+							<p:outputLabel value="Cep:" />
+							<h:outputText value="#{cliente.endereco.cep}" />
+
+						</p:panelGrid>
+					</p:rowExpansion>
+				</p:dataTable>
+
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

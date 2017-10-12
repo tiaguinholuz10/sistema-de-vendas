@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="conteudo">
+		<h:form>
+			<p:panel header="Cadastro de Produtos">
+				<p:messages globalOnly="true" showDetail="true" showSummary="false"
+					closable="true" showIcon="true" />
+				<h:panelGrid columns="3" cellpadding="2">
+
+					<p:outputLabel value="Nome do Produto:" for="nome" />
+					<p:inputText id="nome" value="#{produto.produto.nome}"
+						required="true" requiredMessage="Campo Obrigatório"
+						title="*Campo Obrigatório" minQueryLength="3" maxlength="30" />
+					<p:message for="nome" />
+
+					<p:outputLabel value="CNPJ:" for="cnpj" />
+					
+					
+
+					<p:commandButton value="Lista de Fornecedores" type="button"
+						onclick="PF('dlg3').show();" />
+					<p:dialog header="Lista de Fornecedores" widgetVar="dlg3"
+						style="text-align:center;" showEffect="explode"
+						hideEffect="bounce" height="100%" width="50%">
+						<p:panelGrid columns="1" id="cnpj"
+						style="position:relative; width:265px; heigth:auto;">
+						
+						
+						<p:dataTable id="checkboxDT" selectionMode="multiple"
+							value="#{fornecedorBean.fornecedores}" var="fornecedor"
+							rowKey="#{fornecedor.id}">
+							<p:column selectionMode="multiple"
+								style="width:16px;text-align:center" />
+							<p:column headerText="CNPJ">
+								<h:outputText value="#{fornecedor.cnpj}">
+									<f:converter converterId="cnpjConverter" />
+								</h:outputText>
+							</p:column>
+						</p:dataTable>
+						
+					</p:panelGrid>
+
+
+					</p:dialog>
+					<p:message for="cnpj" />
+
+				</h:panelGrid>
+				<h:panelGrid columns="3" cellpadding="2">
+
+					<p:outputLabel value="Tipo de unidade: " for="unid" />
+					<p:selectOneMenu id="unid" value="#{produto.produto.unid}"
+						style="width:125px">
+						<f:selectItem itemLabel="Selecione " itemValue="" />
+						<f:selectItem itemLabel="Quilograma (kg)" itemValue="KG" />
+						<f:selectItem itemLabel="Unidade (unid)" itemValue="UNIDADE" />
+						<f:selectItem itemLabel="Garrafa (600ml)"
+							itemValue="GARRAFA-600 ML" />
+						<f:selectItem itemLabel="Garrafa (1 Litro)" itemValue="GARRAFA-1L" />
+						<f:selectItem itemLabel="Long Neck" itemValue="LONG NECK" />
+						<f:selectItem itemLabel="Lata (350ml)" itemValue="LATA-350ml)" />
+						<f:selectItem itemLabel="Lata (473ml)" itemValue="LATA-473ml)" />
+					</p:selectOneMenu>
+					<p:message for="unid" />
+
+					<p:outputLabel value="Saldo no Estoque: " for="saldo" />
+					<pe:inputNumber id="saldo" value="#{produto.produto.saldo}"
+						disabled="true" />
+					<p:message for="saldo" />
+
+
+					<p:outputLabel value="Descrição: " for="descricao" />
+					<p:inputTextarea id="descricao" rows="2" cols="30"
+						counter="display" maxlength="120" margin="auto" autoResize="false"
+						counterTemplate="{0} caracteres restantes."
+						value="#{produto.produto.descricao}" />
+					<h:outputText id="display" />
+					<p:message for="descricao" />
+					<br />
+					<br />
+
+				</h:panelGrid>
+				<br />
+				<br />
+				<p:commandButton value="Salvar" action="#{produto.salvar}"
+					update="@form" />
+
+				<p:commandButton value="Cancelar" action="#{produto.cancelar}"
+					update="@form" immediate="true" resetValues="true" />
+				<br />
+				<p:separator />
+				<br />
+				<p:dataTable value="#{produto.produtos}" var="produto">
+					rendered="#{not empty produto.produtos}">
+					
+					<p:column headerText="Código do Produto">
+						<h:outputText value="#{produto.id}" />
+					</p:column>
+
+					<p:column headerText="Nome">
+						<h:outputText value="#{produto.nome}" />
+					</p:column>
+
+					<p:column headerText="Unid.">
+						<h:outputText value="#{produto.unid}" />
+					</p:column>
+
+					<p:column headerText="Saldo">
+						<h:outputText value="#{produto.saldo}" />
+					</p:column>
+
+				</p:dataTable>
+			</p:panel>
+
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>
+</html>
